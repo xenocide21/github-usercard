@@ -122,7 +122,14 @@ body {
   font-style: italic;
   margin: 3px 0 10px;
 }
+input{
+    display: none;
+    visibility: hidden;
+}
 
+#qrcode img{
+    margin-left: 40%;
+}
 /*.card .card-info a {*/
 /*    font-size: xx-large;*/
 /*    color: #2cb5e8;*/
