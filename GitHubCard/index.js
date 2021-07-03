@@ -86,45 +86,58 @@ function idCard(info) {
     githubIcon.style.textDecoration='none';
     githubIcon.style.color='#2cb5e8';
 
-    // const qrCodeDiv = document.createElement('div');
-    // const qrCode = document.createElement('script');
-    //
-    // qrCode.setAttribute('type', 'text/javascript');
-    //
-    // qrCodeDiv.setAttribute('id', 'qrcode');
+
+
+    const input = document.createElement('input');
+    var qrCodeDiv = document.createElement('div');
+    const qrCode = document.createElement('script');
+    card.appendChild(input);
+    card.appendChild(qrCodeDiv);
+    card.appendChild(qrCode);
+    input.setAttribute( 'id', 'input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('value', `${info.data.html_url}`);
+
+    input.style.display='none';
+
+    qrCode.setAttribute('type', 'text/javascript');
+
+    qrCodeDiv.setAttribute('id', 'qrcode');
+
+    qrCodeDiv.style.margin="3% 3%";
+    //this returns an error because the element holding the QR code image is an ID, figuring out how to make it work with a class will be a little more difficult!
+    qrCode.textContent=`const qrcode = new QRCode(document.getElementById('qrcode'));
+
+    function makeCode () {
+        var elText = document.getElementById('input');
+
+        if (!elText.value) {
+            alert("Input a text");
+            elText.focus();
+            return;
+        }
+
+        qrcode.makeCode(elText.value);
+    }
+    makeCode();
+    $("#input").
+    on("blur", function () {
+        makeCode();
+    }).
+    on("keydown", function (e) {
+        if (e.keyCode == 13) {
+            makeCode();
+        }
+    });
+    `;
+
+
+
     // qrCodeDiv.setAttribute('value', `${info.data.html_url}`);
-    //
-    //
-    // card.appendChild(qrCodeDiv);
     // card.appendChild(qrCode);
-    // var qrcode = new QRCode(document.getElementById('qrcode'));
-    //
-    // function makeCode () {
-    //     var elText = document.getElementById('qrcode');
-    //
-    //     if (!elText.value) {
-    //         alert("Input a text");
-    //         elText.focus();
-    //         return;
-    //     }
-    //
-    //     qrcode.makeCode(elText.value);
-    // }
-    // makeCode();
-    // $("#text").
-    // on("blur", function () {
-    //     makeCode();
-    // }).
-    // on("keydown", function (e) {
-    //     if (e.keyCode == 13) {
-    //         makeCode();
-    //     }
-    // });
-
-
-
     return card;
 }
+
 
 
 
